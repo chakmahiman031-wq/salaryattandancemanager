@@ -18,16 +18,17 @@ jobs:
         with:
           distribution: temurin
           java-version: "17"
-          cache: gradle
 
       - name: Make Gradle executable
-        run: chmod +x ./gradlew
+        run: chmod +x SalaryAttendanceManager/gradlew
 
       - name: Build Debug APK
+        working-directory: SalaryAttendanceManager
         run: ./gradlew assembleDebug --stacktrace
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: app-debug
-          path: "**/build/outputs/apk/debug/*.apk"
+          path: SalaryAttendanceManager/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
